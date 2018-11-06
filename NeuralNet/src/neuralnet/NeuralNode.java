@@ -1,6 +1,6 @@
 package neuralnet;
 
-public class NeuralNode {
+public class NeuralNode{
     private int num_connections;
     //calculation values
     private Double[] weights;

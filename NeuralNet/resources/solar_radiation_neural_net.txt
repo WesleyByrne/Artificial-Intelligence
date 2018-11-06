@@ -3,4 +3,4 @@ resources/solar_radiation.txt
 3
 3
 0.1
-0.1
+0.3

@@ -1,5 +1,6 @@
 resources/custom_points.txt
-1
+10
 3
+7
 0.1
 0.2

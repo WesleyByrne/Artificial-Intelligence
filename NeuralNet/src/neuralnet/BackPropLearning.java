@@ -73,6 +73,9 @@ public class BackPropLearning {
     }
 
     public java.util.ArrayList<DataPoint> getDefaultExamples(){return default_examples;}
+    public Double getLargestVal(){return largest_val;}
+    public int getInputSize(){return inputSize;}
+    public int getOutputSize(){return outputSize;}
 
     public BackPropLearning(String data_file, int[] nodes, Double learning_rate, Double error_tol)
     {
@@ -109,5 +112,39 @@ public class BackPropLearning {
             txt = rf.readLine();
         }
         this.nodes = nodes;
+    }
+    
+    public BackPropLearning(String data_file, Double learning_rate, Double error_tol)
+    {
+        util.ReadTextFile rf = new util.ReadTextFile(data_file);
+
+        this.largest_val = Double.valueOf(rf.readLine());
+        this.learning_rate = learning_rate;
+        this.error_tol = error_tol;
+
+        String txt = rf.readLine();
+        String[] txt_split = txt.split(",");
+        txt = rf.readLine();
+
+        inputSize = Integer.valueOf(txt_split[0]);
+        outputSize = Integer.valueOf(txt_split[1]);
+        //Set examples array
+        Double[] inp_arr,out_arr;
+        this.default_examples = new java.util.ArrayList<DataPoint>();
+        while (!rf.EOF())
+        {
+            inp_arr = new Double[inputSize];
+            out_arr = new Double[outputSize];
+            txt_split = txt.split(",");
+            //adds new DataPoint with x, and y values
+            for (int i=0; i<inputSize; i++)
+                inp_arr[i] = Double.valueOf(txt_split[i]);
+            for (int i=inputSize;i<txt_split.length;i++)
+                out_arr[i-inputSize] = Double.valueOf(txt_split[i]);
+
+            this.default_examples.add(new DataPoint(inp_arr, out_arr));
+            txt = rf.readLine();
+        }
+        nodes = new int[]{0};
     }
 }

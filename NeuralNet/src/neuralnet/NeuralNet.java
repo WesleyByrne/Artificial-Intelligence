@@ -5,6 +5,7 @@ public class NeuralNet{
     private java.util.ArrayList<NeuralNode[]> layers;
     private int num_layers;
     private Double learning_rate, error_tol, largest_val;
+    public Double avg_err;
 
     public void updateWeights()
     {
@@ -24,31 +25,40 @@ public class NeuralNet{
         }
     }
 
-    public Double[] returnOutput(Double[] input)
+    public void reportArchitecture()
+    {
+        System.out.println("Hidden Layers: " +(num_layers-2)+"");
+        //for (int i=1;i<num_layers-1;i++)
+            System.out.println("Layers have "+layers.get(1).length+" nodes.");
+            //System.out.println("layer "+i+" has "+layers.get(i).length+" nodes.");
+    }
+
+    public java.util.ArrayList<DataPoint> returnOutput(java.util.ArrayList<DataPoint> examples)
     {
         Double in=0.0,delt;
         NeuralNode[] layer;
-        Double[] output = new Double[getOutputs().length];
-
-        layer = getInputs();
-        for(int i=0;i<layer.length;i++)
+        for(DataPoint example:examples) //example
         {
-            layer[i].setActivation(input[i]);
-        }
-        for (int l=2;l<=getNumLayers();l++) //forward
-        {
-            for(int j=0;j<getLayer(l).length;j++)
+            layer = getInputs();
+            for(int i=0;i<layer.length;i++)
             {
-                in = weightedSum(l,j);
-                setNodeIn(l,j,in);
-                delt = g_x(in);
-                setNodeActivation(l,j,delt);
-                //aj = output in last layer
-                if (l==getNumLayers()) 
-                    output[j] = delt*largest_val;
+                layer[i].setActivation(example.getX(i));
+            }
+            for (int l=2;l<=getNumLayers();l++) //forward
+            {
+                for(int j=0;j<getLayer(l).length;j++)
+                {
+                    in = weightedSum(l,j);
+                    setNodeIn(l,j,in);
+                    delt = g_x(in);
+                    setNodeActivation(l,j,delt);
+                    //aj = output in last layer
+                    if (l==getNumLayers()) 
+                        example.setLearnedValue(j,delt);
+                }
             }
         }
-        return output;
+        return examples;
     }  
 
     public Double g_x(Double x)

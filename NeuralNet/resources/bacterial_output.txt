@@ -1,0 +1,39 @@
+Buildfile: f:\CSC 4240 - Artificial Intelligence\NeuralNet\build.xml
+
+prepare:
+   [delete] Deleting directory f:\CSC 4240 - Artificial Intelligence\NeuralNet\build
+    [mkdir] Created dir: f:\CSC 4240 - Artificial Intelligence\NeuralNet\build
+
+build:
+    [javac] Compiling 23 source files to f:\CSC 4240 - Artificial Intelligence\NeuralNet\build
+    [javac] Note: f:\CSC 4240 - Artificial Intelligence\NeuralNet\src\neuralnet\BackPropLearning.java uses unchecked or unsafe operations.
+    [javac] Note: Recompile with -Xlint:unchecked for details.
+
+run:
+     [java] 
+     [java] input: 0.0, expected output: 67.0
+     [java] NeuralNet output:
+     [java] 65.08071611449306
+     [java] 
+     [java] input: 4.0, expected output: 84.0
+     [java] NeuralNet output:
+     [java] 83.12074666163728
+     [java] 
+     [java] input: 8.0, expected output: 98.0
+     [java] NeuralNet output:
+     [java] 97.5626001152864
+     [java] 
+     [java] input: 12.0, expected output: 125.0
+     [java] NeuralNet output:
+     [java] 107.54057976125786
+     [java] 
+     [java] input: 16.0, expected output: 149.0
+     [java] NeuralNet output:
+     [java] 114.80633975920512
+     [java] 
+     [java] input: 20.0, expected output: 185.0
+     [java] NeuralNet output:
+     [java] 120.61426851564805
+
+BUILD SUCCESSFUL
+Total time: 4 seconds

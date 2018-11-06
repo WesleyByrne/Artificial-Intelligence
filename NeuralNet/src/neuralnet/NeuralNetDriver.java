@@ -16,11 +16,17 @@ public static void main(String[] args) {
     Double learning_rate = Double.valueOf(rf.readLine());
     Double error_tol = Double.valueOf(rf.readLine());
 
-    BackPropLearning learner = new BackPropLearning(data_file,hidden_layers,hl_nodes,learning_rate,error_tol);
+    BackPropLearning learner = new BackPropLearning(data_file,hl_nodes,learning_rate,error_tol);
     NeuralNet nerval_netty = learner.doTheWork();
 
-    Double lar = learner.getLargestVal();
-    java.util.ArrayList<DataPoint> examples = learner.getExamples();
+    Double lar = nerval_netty.getLargestVal();
+    java.util.ArrayList<DataPoint> examples = learner.getDefaultExamples();
+
+    /*System.out.println("beep");
+    Double[] arr = {2.0};
+    arr = nerval_netty.returnOutput(arr); 
+    for (int i=0;i<arr.length;i++)
+      System.out.println(arr[i]);*/
     for (int i=0; i<examples.size(); i++)
       examples.get(i).displayLearnedOutput(lar);
     System.out.println("Error summed:\n"+String.format("%.5g%n", SumOutputs.sum(lar, examples)));

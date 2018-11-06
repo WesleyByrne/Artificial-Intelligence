@@ -4,8 +4,10 @@ public class NeuralNet{
 
     private java.util.ArrayList<NeuralNode[]> layers;
     private int num_layers;
+    private Double learning_rate, error_tol, largest_val;
+    public Double avg_err;
 
-    public void updateWeights(Double learning_rate)
+    public void updateWeights()
     {
         Double value;
 
@@ -23,6 +25,52 @@ public class NeuralNet{
         }
     }
 
+    public void reportArchitecture()
+    {
+        System.out.println("Hidden Layers: " +(num_layers-2)+"");
+        //for (int i=1;i<num_layers-1;i++)
+            System.out.println("Layers have "+layers.get(1).length+" nodes.");
+            //System.out.println("layer "+i+" has "+layers.get(i).length+" nodes.");
+    }
+
+    public java.util.ArrayList<DataPoint> returnOutput(java.util.ArrayList<DataPoint> examples)
+    {
+        Double in=0.0,delt;
+        NeuralNode[] layer;
+        for(DataPoint example:examples) //example
+        {
+            layer = getInputs();
+            for(int i=0;i<layer.length;i++)
+            {
+                layer[i].setActivation(example.getX(i));
+            }
+            for (int l=2;l<=getNumLayers();l++) //forward
+            {
+                for(int j=0;j<getLayer(l).length;j++)
+                {
+                    in = weightedSum(l,j);
+                    setNodeIn(l,j,in);
+                    delt = g_x(in);
+                    setNodeActivation(l,j,delt);
+                    //aj = output in last layer
+                    if (l==getNumLayers()) 
+                        example.setLearnedValue(j,delt);
+                }
+            }
+        }
+        return examples;
+    }  
+
+    public Double g_x(Double x)
+    {
+        return (1/(1+java.lang.Math.exp(-x)));
+    }
+
+    public Double g_dev(Double x)
+    {
+        return (g_x(x)*(1-g_x(x)));
+    }
+
     public Double weightedDeltaSum(int index, int node_index)
     {
         Double value=0.0;
@@ -34,18 +82,6 @@ public class NeuralNet{
             value += node.getWeight(i)*j_delta;
         }
         return value;
-    }
-
-    public int getNumLayers()
-    {
-        return num_layers;
-    }
-
-    //IMPORTANT
-    //using 1-based index
-    public NeuralNode[] getLayer(int index)
-    {
-        return layers.get(index-1);
     }
 
     //to calculate inj: sum of wi,j * ai
@@ -73,19 +109,24 @@ public class NeuralNet{
         tmp[node_index].setActivation(act);
     }
 
-    public NeuralNode[] getInputs()
-    {
-        return layers.get(0);
-    }
+    public int getNumLayers(){return num_layers;}
+    public void setLearningRate(Double val){learning_rate=val;}
+    public Double getLearningRate(){return learning_rate;}
+    public void setErrorTol(Double val){error_tol=val;}
+    public Double getErrorTol(){return error_tol;}
+    public void setLargestVal(Double val){largest_val=val;}
+    public Double getLargestVal(){return largest_val;}
+    
+    public NeuralNode[] getInputs(){return layers.get(0);}
+    public NeuralNode[] getOutputs(){return layers.get(num_layers-1);}
+    public NeuralNode[] getLayer(int index){return layers.get(index-1);} //IMPORTANT: using 1-based index
 
-    public NeuralNode[] getOutputs()
+    public NeuralNet(int[] nodes, Double learning_rate, Double error_tol, Double largest_val)
     {
-        return layers.get(num_layers-1);
-    }
-
-    public NeuralNet(int num_layers, int[] nodes)
-    {
-        this.num_layers = num_layers;
+        this.learning_rate = learning_rate;
+        this.error_tol = error_tol;
+        this.largest_val = largest_val;
+        this.num_layers = nodes.length;
         this.layers = new java.util.ArrayList<NeuralNode[]>();
         java.util.Random rnd = new java.util.Random(); // for setting weights within nodes
 

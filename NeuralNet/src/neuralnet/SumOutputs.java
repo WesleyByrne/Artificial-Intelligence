@@ -1,10 +1,8 @@
 package neuralnet;
-
-import java.util.ArrayList;
-
+ 
 public class SumOutputs
 {
-    static Double sum(Double lar, ArrayList<DataPoint> examples)
+    static Double sum(Double lar, java.util.ArrayList<DataPoint> examples)
     {
         Double values = 0.0;
         for (DataPoint example:examples)

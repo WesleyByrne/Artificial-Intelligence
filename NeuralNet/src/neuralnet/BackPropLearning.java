@@ -2,29 +2,23 @@ package neuralnet;
 
 public class BackPropLearning {
 
-    private int num_inputs;
-    private int num_outputs;
-    private int hidden_layers;
+    private java.util.ArrayList<DataPoint> default_examples;
+    private int inputSize, outputSize;
     private int[] nodes;
-
-    private java.util.ArrayList<DataPoint> examples;
-    private Double learning_rate; 
-    private Double error_tol;
-
-    private Double largest_val;
+    private Double learning_rate, error_tol, largest_val;
 
     public NeuralNet doTheWork()
     {
-        NeuralNet new_net = new NeuralNet(hidden_layers+2, nodes);
-        return BackPropAlg(new_net);
+        NeuralNet net = new NeuralNet(nodes,learning_rate,error_tol,largest_val);
+        return BackPropAlg(net, default_examples);
     }
 
-    public NeuralNet BackPropAlg(NeuralNet net)
+    public NeuralNet BackPropAlg(NeuralNet net, java.util.ArrayList<DataPoint> examples)
     {
         Double in=0.0,delt;
         NeuralNode[] layer;
         long tStart = System.currentTimeMillis();
-        while((System.currentTimeMillis() - tStart) <= (error_tol*60*1000))
+        while((System.currentTimeMillis() - tStart) <= (net.getErrorTol()*60*1000))
         {
             for(DataPoint example:examples) //example
             {   
@@ -50,7 +44,7 @@ public class BackPropLearning {
                 layer = net.getOutputs();
                 for (int i=0;i<layer.length;i++) //backward
                 {
-                    delt = (   g_dev(layer[i].getIn())*(example.getY(i)/largest_val-layer[i].getActivation())  );
+                    delt = (   g_dev(layer[i].getIn())*(example.getY(i)/net.getLargestVal()-layer[i].getActivation())  );
                     layer[i].setDelta(delt);
                 }
                 for (int l=net.getNumLayers()-1;l>=1;l--)
@@ -60,18 +54,12 @@ public class BackPropLearning {
                     {
                         delt = (   g_dev(layer[i].getIn())*net.weightedDeltaSum(l,i)   );
                         layer[i].setDelta(delt);
-                        //System.out.println(node.weightedDeltaSum());
                     }
                 }
-                net.updateWeights(learning_rate);
+                net.updateWeights();
             }
         }
         return net;
-    }
-
-    public Double getLargestVal()
-    {
-        return largest_val;
     }
 
     public Double g_x(Double x)
@@ -84,46 +72,42 @@ public class BackPropLearning {
         return (g_x(x)*(1-g_x(x)));
     }
 
-    public java.util.ArrayList<DataPoint> getExamples()
-    {
-        return examples;
-    }
+    public java.util.ArrayList<DataPoint> getDefaultExamples(){return default_examples;}
 
-    public BackPropLearning(String data_file, int hidden_layers, int[] hl_nodes, Double learning_rate, Double error_tol)
+    public BackPropLearning(String data_file, int[] nodes, Double learning_rate, Double error_tol)
     {
         util.ReadTextFile rf = new util.ReadTextFile(data_file);
+
         this.largest_val = Double.valueOf(rf.readLine());
+        this.learning_rate = learning_rate;
+        this.error_tol = error_tol;
+
         String txt = rf.readLine();
         String[] txt_split = txt.split(",");
         txt = rf.readLine();
 
-        this.num_inputs = Integer.valueOf(txt_split[0]);
-        hl_nodes[0] = num_inputs;
-        this.num_outputs = Integer.valueOf(txt_split[1]);
-        hl_nodes[hl_nodes.length-1] = num_outputs;
-        int num_layers = 2;
-        
-        this.examples = new java.util.ArrayList();
+        nodes[0] = Integer.valueOf(txt_split[0]);
+        nodes[nodes.length-1] = Integer.valueOf(txt_split[1]);
 
+        inputSize = nodes[0];
+        outputSize = nodes[nodes.length-1];
+        //Set examples array
         Double[] inp_arr,out_arr;
-
+        this.default_examples = new java.util.ArrayList<DataPoint>();
         while (!rf.EOF())
         {
-            inp_arr = new Double[num_inputs];
-            out_arr = new Double[num_outputs];
+            inp_arr = new Double[nodes[0]];
+            out_arr = new Double[nodes[nodes.length-1]];
             txt_split = txt.split(",");
             //adds new DataPoint with x, and y values
-            for (int i=0; i<num_inputs; i++)
+            for (int i=0; i<nodes[0]; i++)
                 inp_arr[i] = Double.valueOf(txt_split[i]);
-            for (int i=num_inputs;i<txt_split.length;i++)
-                out_arr[i-num_inputs] = Double.valueOf(txt_split[i]);
+            for (int i=nodes[0];i<txt_split.length;i++)
+                out_arr[i-nodes[0]] = Double.valueOf(txt_split[i]);
 
-            this.examples.add(new DataPoint(inp_arr, out_arr));
+            this.default_examples.add(new DataPoint(inp_arr, out_arr));
             txt = rf.readLine();
         }
-        this.hidden_layers=hidden_layers;
-        this.nodes=hl_nodes;
-        this.learning_rate=learning_rate;
-        this.error_tol=error_tol;
+        this.nodes = nodes;
     }
 }

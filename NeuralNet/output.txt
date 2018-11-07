@@ -1,0 +1,51 @@
+Buildfile: f:\CSC 4240 - Artificial Intelligence\Artificial-Intelligence\NeuralNet\build.xml
+
+prepare:
+   [delete] Deleting directory f:\CSC 4240 - Artificial Intelligence\Artificial-Intelligence\NeuralNet\build
+    [mkdir] Created dir: f:\CSC 4240 - Artificial Intelligence\Artificial-Intelligence\NeuralNet\build
+
+build:
+    [javac] Compiling 26 source files to f:\CSC 4240 - Artificial Intelligence\Artificial-Intelligence\NeuralNet\build
+    [javac] f:\CSC 4240 - Artificial Intelligence\Artificial-Intelligence\NeuralNet\src\neuralnet\NeuralNetArchitectureDriver.java:72: error: illegal start of expression
+    [javac]                 }
+    [javac]                 ^
+    [javac] f:\CSC 4240 - Artificial Intelligence\Artificial-Intelligence\NeuralNet\src\neuralnet\NeuralNetArchitectureDriver.java:73: error: ')' expected
+    [javac]                 nets.add(new NeuralNet(nodes, learning_rate, error_tol, learner.getLargestVal());
+    [javac]                                                                                                 ^
+    [javac] f:\CSC 4240 - Artificial Intelligence\Artificial-Intelligence\NeuralNet\src\neuralnet\NeuralNetArchitectureDriver.java:125: error: illegal start of expression
+    [javac] 	private void recursiveFill(ArrayList<int> combos, int[] combo, int i, int max)
+    [javac] 	^
+    [javac] f:\CSC 4240 - Artificial Intelligence\Artificial-Intelligence\NeuralNet\src\neuralnet\NeuralNetArchitectureDriver.java:125: error: illegal start of expression
+    [javac] 	private void recursiveFill(ArrayList<int> combos, int[] combo, int i, int max)
+    [javac] 	        ^
+    [javac] f:\CSC 4240 - Artificial Intelligence\Artificial-Intelligence\NeuralNet\src\neuralnet\NeuralNetArchitectureDriver.java:125: error: ';' expected
+    [javac] 	private void recursiveFill(ArrayList<int> combos, int[] combo, int i, int max)
+    [javac] 	                          ^
+    [javac] f:\CSC 4240 - Artificial Intelligence\Artificial-Intelligence\NeuralNet\src\neuralnet\NeuralNetArchitectureDriver.java:125: error: <identifier> expected
+    [javac] 	private void recursiveFill(ArrayList<int> combos, int[] combo, int i, int max)
+    [javac] 	                                                 ^
+    [javac] f:\CSC 4240 - Artificial Intelligence\Artificial-Intelligence\NeuralNet\src\neuralnet\NeuralNetArchitectureDriver.java:125: error: illegal start of expression
+    [javac] 	private void recursiveFill(ArrayList<int> combos, int[] combo, int i, int max)
+    [javac] 	                                                     ^
+    [javac] f:\CSC 4240 - Artificial Intelligence\Artificial-Intelligence\NeuralNet\src\neuralnet\NeuralNetArchitectureDriver.java:125: error: ';' expected
+    [javac] 	private void recursiveFill(ArrayList<int> combos, int[] combo, int i, int max)
+    [javac] 	                                                      ^
+    [javac] f:\CSC 4240 - Artificial Intelligence\Artificial-Intelligence\NeuralNet\src\neuralnet\NeuralNetArchitectureDriver.java:125: error: not a statement
+    [javac] 	private void recursiveFill(ArrayList<int> combos, int[] combo, int i, int max)
+    [javac] 	                                                        ^
+    [javac] f:\CSC 4240 - Artificial Intelligence\Artificial-Intelligence\NeuralNet\src\neuralnet\NeuralNetArchitectureDriver.java:125: error: ';' expected
+    [javac] 	private void recursiveFill(ArrayList<int> combos, int[] combo, int i, int max)
+    [javac] 	                                                             ^
+    [javac] f:\CSC 4240 - Artificial Intelligence\Artificial-Intelligence\NeuralNet\src\neuralnet\NeuralNetArchitectureDriver.java:125: error: <identifier> expected
+    [javac] 	private void recursiveFill(ArrayList<int> combos, int[] combo, int i, int max)
+    [javac] 	                                                                     ^
+    [javac] f:\CSC 4240 - Artificial Intelligence\Artificial-Intelligence\NeuralNet\src\neuralnet\NeuralNetArchitectureDriver.java:125: error: not a statement
+    [javac] 	private void recursiveFill(ArrayList<int> combos, int[] combo, int i, int max)
+    [javac] 	                                                                          ^
+    [javac] f:\CSC 4240 - Artificial Intelligence\Artificial-Intelligence\NeuralNet\src\neuralnet\NeuralNetArchitectureDriver.java:125: error: ';' expected
+    [javac] 	private void recursiveFill(ArrayList<int> combos, int[] combo, int i, int max)
+    [javac] 	                                                                             ^
+    [javac] f:\CSC 4240 - Artificial Intelligence\Artificial-Intelligence\NeuralNet\src\neuralnet\NeuralNetArchitectureDriver.java:138: error: reached end of file while parsing
+    [javac] }
+    [javac]  ^
+    [javac] 14 errors

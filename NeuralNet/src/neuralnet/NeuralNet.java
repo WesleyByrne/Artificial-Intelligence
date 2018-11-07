@@ -27,10 +27,9 @@ public class NeuralNet{
 
     public void reportArchitecture()
     {
-        System.out.println("Hidden Layers: " +(num_layers-2)+"");
-        //for (int i=1;i<num_layers-1;i++)
-            System.out.println("Layers have "+layers.get(1).length+" nodes.");
-            //System.out.println("layer "+i+" has "+layers.get(i).length+" nodes.");
+        System.out.println((num_layers-2)+" hidden layer(s) in neural net");
+        for (int i=1;i<num_layers-1;i++)
+            System.out.println("layer "+i+" has "+layers.get(i).length+" node(s)");
     }
 
     public java.util.ArrayList<DataPoint> returnOutput(java.util.ArrayList<DataPoint> examples)

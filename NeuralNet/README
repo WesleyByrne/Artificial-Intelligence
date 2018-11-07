@@ -1,2 +1,6 @@
+
+(build %driveletter%)
 build.bat for main algorithm execution
-kbuild.bat for architecture optimization
+
+(kbuild %driveletter%)
+kbuild.bat for k-fold architecture optimization

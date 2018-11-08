@@ -1,0 +1,18 @@
+Buildfile: F:\CSC 4240 - Artificial Intelligence\Artificial-Intelligence\NeuralNet\build.xml
+
+prepare:
+   [delete] Deleting directory F:\CSC 4240 - Artificial Intelligence\Artificial-Intelligence\NeuralNet\build
+    [mkdir] Created dir: F:\CSC 4240 - Artificial Intelligence\Artificial-Intelligence\NeuralNet\build
+
+build:
+    [javac] Compiling 26 source files to F:\CSC 4240 - Artificial Intelligence\Artificial-Intelligence\NeuralNet\build
+    [javac] Note: F:\CSC 4240 - Artificial Intelligence\Artificial-Intelligence\NeuralNet\src\neuralnet\NeuralNetArchitectureDriver.java uses unchecked or unsafe operations.
+    [javac] Note: Recompile with -Xlint:unchecked for details.
+
+k_run:
+     [java] 
+     [java] Combos to process:462
+     [java] Exception in thread "main" java.lang.IndexOutOfBoundsException: Index: 0, Size: 0
+     [java] 	at java.util.ArrayList.rangeCheck(ArrayList.java:653)
+     [java] 	at java.util.ArrayList.get(ArrayList.java:429)
+     [java] 	at neuralnet.NeuralNetArchitectureDriver.main(Unknown Source)

@@ -54,13 +54,13 @@ public class NeuralNetArchitectureDriver {
 			}				
         }
         
-        /*for (int[] ints:combos){
-            for (int num:ints) {
+        for (int[] ints:combos){
+            /*for (int num:ints) {
                 System.out.print(num);
-            }
+            }*/
             nets.add(new NeuralNet(ints,learning_rate,error_tol,learner.getLargestVal()));
-            System.out.print(", ");
-        }*/
+            //System.out.print(", ");
+        }
         System.out.print("\nCombos to process:"+combos.size()+"\n");
         
         /*NeuralNet new_net;

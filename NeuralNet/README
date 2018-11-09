@@ -4,3 +4,6 @@ build.bat for main algorithm execution
 
 (kbuild %driveletter%)
 kbuild.bat for k-fold architecture optimization
+
+Computed optimization was 3 hidden layers, {6,3,5}
+results stored in resources/optimal.txt, computation output in architecture_output.txt
